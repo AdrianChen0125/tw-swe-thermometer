@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-label="年薪分布">
+<style>
+.title{font:700 24px sans-serif;fill:#0f172a}.axis{font:12px sans-serif;fill:#475569}.bar{fill:#14b8a6}.note{font:13px sans-serif;fill:#475569}
+</style>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="38" class="title">年薪分布</text>
+<text x="64" y="412" class="note">單位：萬元</text>
+<line x1="64" y1="362" x2="932" y2="362" stroke="#cbd5e1"/>
+<rect x="67.5" y="308.0" width="65.3" height="54.0" rx="4" class="bar"/><rect x="139.8" y="70.0" width="65.3" height="292.0" rx="4" class="bar"/><rect x="212.2" y="192.7" width="65.3" height="169.3" rx="4" class="bar"/><rect x="284.5" y="300.7" width="65.3" height="61.3" rx="4" class="bar"/><rect x="356.8" y="343.6" width="65.3" height="18.4" rx="4" class="bar"/><rect x="429.2" y="346.1" width="65.3" height="15.9" rx="4" class="bar"/><rect x="501.5" y="354.6" width="65.3" height="7.4" rx="4" class="bar"/><rect x="573.8" y="355.9" width="65.3" height="6.1" rx="4" class="bar"/><rect x="646.2" y="360.8" width="65.3" height="1.2" rx="4" class="bar"/><rect x="718.5" y="360.8" width="65.3" height="1.2" rx="4" class="bar"/><rect x="790.8" y="362.0" width="65.3" height="0.0" rx="4" class="bar"/><rect x="863.2" y="358.3" width="65.3" height="3.7" rx="4" class="bar"/>
+<text x="67.5" y="396" class="axis">6.3</text><text x="212.2" y="396" class="axis">97.5</text><text x="356.8" y="396" class="axis">188.7</text><text x="501.5" y="396" class="axis">279.9</text><text x="646.2" y="396" class="axis">371.1</text><text x="790.8" y="396" class="axis">462.3</text>
+</svg>

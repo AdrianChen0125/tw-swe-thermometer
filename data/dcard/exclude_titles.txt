@@ -1,0 +1,33 @@
+# Titles to drop from the cleaned salary dataset.
+
+# management / supervisory titles
+account executive
+副經理
+課副理
+資深專案副理
+襄理
+
+# assistant / coordinator / support titles
+特助
+專案助理
+計畫助理
+初辦
+
+# non-engineering roles
+廚師
+行銷
+設計
+硬體
+證券相關
+
+# department / function names
+it部門
+智金處
+
+# overly generic / ambiguous titles
+底層
+
+# add new title exclusions here
+# example:
+# 客服
+# 店員

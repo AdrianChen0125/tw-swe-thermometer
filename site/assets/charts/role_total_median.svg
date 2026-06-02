@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="374" viewBox="0 0 960 374" role="img" aria-label="職能年薪中位數排行（n &gt;= 10）">
+<style>
+.title{font:700 24px sans-serif;fill:#0f172a}.label{font:14px sans-serif;fill:#334155}.value{font:13px sans-serif;fill:#0f172a}.bar{fill:#2563eb}
+</style>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="38" class="title">職能年薪中位數排行（n &gt;= 10）</text>
+<text x="24" y="96" class="label">software engineer</text><rect x="230" y="74" width="620.0" height="24" rx="4" class="bar"/><text x="862.0" y="92" class="value">98 萬</text><text x="24" y="134" class="label">backend engineer</text><rect x="230" y="112" width="531.4" height="24" rx="4" class="bar"/><text x="773.4" y="130" class="value">84 萬</text><text x="24" y="172" class="label">mobile engineer</text><rect x="230" y="150" width="526.4" height="24" rx="4" class="bar"/><text x="768.4" y="168" class="value">83.2 萬</text><text x="24" y="210" class="label">product manager</text><rect x="230" y="188" width="505.5" height="24" rx="4" class="bar"/><text x="747.5" y="206" class="value">79.9 萬</text><text x="24" y="248" class="label">system engineer</text><rect x="230" y="226" width="482.1" height="24" rx="4" class="bar"/><text x="724.1" y="244" class="value">76.2 萬</text><text x="24" y="286" class="label">qa engineer</text><rect x="230" y="264" width="460.6" height="24" rx="4" class="bar"/><text x="702.6" y="282" class="value">72.8 萬</text><text x="24" y="324" class="label">frontend engineer</text><rect x="230" y="302" width="459.9" height="24" rx="4" class="bar"/><text x="701.9" y="320" class="value">72.7 萬</text>
+</svg>

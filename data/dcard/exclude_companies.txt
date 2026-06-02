@@ -1,0 +1,78 @@
+# Companies or placeholders to drop from the cleaned salary dataset.
+
+# obvious junk / test values
+Ter
+測試
+Phase
+光
+655
+不好說
+X
+只想看結果
+T
+A
+G
+Exxxxxxxxxnd
+XXXXXXXXXX
+Ww
+不想說
+W
+
+# anonymous / location-based descriptions
+台北接案 全遠端
+接案公司
+台北某公司
+台北純軟公司
+歐洲外商
+某aws代理商
+桃園小公司
+大安區小公司
+台北外商
+一間外商
+美商
+歐商
+德商
+某綠色停車場業
+某小券商
+台北中小型家裝公司
+內湖hubc開頭做穿戴式裝置算法
+gcp代理大廠
+
+# other shorthand / misc
+si
+cola
+
+# company names that should be excluded directly
+電子
+Test
+高雄間接案公司 不在高軟但靠近
+國內百名
+國內百年民營銀行
+XX科技
+凌群電腦
+群暉科技
+外商鍵鼠公司
+台北接案
+台中接案公司
+外商純軟
+矽谷外商
+某乙方接案公司 有高雄與台北兩個地方 我是台北的
+台北內湖的公司 非純軟
+內湖
+內湖大樹
+公園院
+資X院
+網X信
+國興XX
+ecloudvalxxxxxx
+6112
+104
+1111
+藍色開頭
+中山基BC
+矽谷自駕車
+
+# add new company exclusions here
+# example:
+# 某匿名公司
+# 台北某外商

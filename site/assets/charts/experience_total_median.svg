@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-label="年資與年薪中位數（排除未知年資）">
+<style>
+.title{font:700 24px sans-serif;fill:#0f172a}.axis{font:12px sans-serif;fill:#475569}.value{font:13px sans-serif;fill:#0f172a}.comparison-value{font:12px sans-serif;fill:#2563eb}.legend{font:13px sans-serif;fill:#334155}.line{fill:none;stroke:#f97316;stroke-width:4}.dot{fill:#f97316}.comparison-line{fill:none;stroke:#2563eb;stroke-width:3;stroke-dasharray:8 6}.comparison-dot{fill:#2563eb}
+</style>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="38" class="title">年資與年薪中位數（排除未知年資）（萬元）</text>
+<line x1="74" y1="352" x2="924" y2="352" stroke="#cbd5e1"/>
+<path d="M74.0,187.9 L286.5,214.7 L499.0,190.7 L711.5,137.0 L924.0,88.9" class="line"/>
+<path d="M74.0,204.2 L286.5,177.8 L499.0,142.5 L711.5,98.4 L924.0,72.0" class="comparison-line"/>
+<circle cx="74.0" cy="187.9" r="5" class="dot"/><circle cx="286.5" cy="214.7" r="5" class="dot"/><circle cx="499.0" cy="190.7" r="5" class="dot"/><circle cx="711.5" cy="137.0" r="5" class="dot"/><circle cx="924.0" cy="88.9" r="5" class="dot"/>
+<circle cx="74.0" cy="204.2" r="4" class="comparison-dot"/><circle cx="286.5" cy="177.8" r="4" class="comparison-dot"/><circle cx="499.0" cy="142.5" r="4" class="comparison-dot"/><circle cx="711.5" cy="98.4" r="4" class="comparison-dot"/><circle cx="924.0" cy="72.0" r="4" class="comparison-dot"/>
+<text x="74.0" y="215.9" text-anchor="middle" class="value">85.5</text><text x="286.5" y="242.7" text-anchor="middle" class="value">71.5</text><text x="499.0" y="218.7" text-anchor="middle" class="value">84</text><text x="711.5" y="165.0" text-anchor="middle" class="value">112</text><text x="924.0" y="116.9" text-anchor="middle" class="value">137.1</text>
+<text x="74.0" y="186.2" text-anchor="middle" class="comparison-value">77</text><text x="286.5" y="159.8" text-anchor="middle" class="comparison-value">90.7</text><text x="499.0" y="124.5" text-anchor="middle" class="comparison-value">109.1</text><text x="711.5" y="90.0" text-anchor="middle" class="comparison-value">132.1</text><text x="924.0" y="90.0" text-anchor="middle" class="comparison-value">145.8</text>
+<text x="74.0" y="392" text-anchor="middle" class="axis">0-1 年</text><text x="286.5" y="392" text-anchor="middle" class="axis">1-3 年</text><text x="499.0" y="392" text-anchor="middle" class="axis">3-5 年</text><text x="711.5" y="392" text-anchor="middle" class="axis">5-8 年</text><text x="924.0" y="392" text-anchor="middle" class="axis">8+ 年</text>
+<g><rect x="746" y="26" width="12" height="12" rx="3" fill="#f97316"/><text x="766" y="36" class="legend">實際中位數</text></g><g><rect x="746" y="50" width="12" height="12" rx="3" fill="#2563eb"/><text x="766" y="60" class="legend">0-8 年回歸估算</text></g>
+</svg>
