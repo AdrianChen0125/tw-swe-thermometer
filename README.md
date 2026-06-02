@@ -1,6 +1,17 @@
 # tw-swe-thermometer
 Taiwan software engineer salary transparency platform.
 
+## Repository Layout
+
+```text
+.
+├─ .github/                GitHub Pages workflow
+├─ data/dcard/             Raw input data and exclusion lists
+├─ scripts/                Cleaning, report generation, and deploy helpers
+├─ site/                   Generated static site output
+└─ company_industry_classification.csv  Company-to-industry mapping
+```
+
 ## GitHub Pages deployment
 
 1. Push this repo to GitHub.
