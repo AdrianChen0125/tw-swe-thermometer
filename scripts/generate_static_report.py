@@ -995,13 +995,13 @@ def build_site(input_path: Path, output_dir: Path) -> None:
     overall_summary = summarize_by_bucket(rows, bucket_order)
     monthly_series = [
         (COMPANY_DISPLAY_NAME, [company_summary[bucket]["monthly"] or None for bucket in bucket_order]),
-        ("同產業", [industry_summary[bucket]["monthly"] or None for bucket in bucket_order]),
-        ("全市場", [overall_summary[bucket]["monthly"] or None for bucket in bucket_order]),
+        ("Dcard 同產業", [industry_summary[bucket]["monthly"] or None for bucket in bucket_order]),
+        ("Dcard 全市場", [overall_summary[bucket]["monthly"] or None for bucket in bucket_order]),
     ]
     total_series = [
         (COMPANY_DISPLAY_NAME, [company_summary[bucket]["total"] or None for bucket in bucket_order]),
-        ("同產業", [industry_summary[bucket]["total"] or None for bucket in bucket_order]),
-        ("全市場", [overall_summary[bucket]["total"] or None for bucket in bucket_order]),
+        ("Dcard 同產業", [industry_summary[bucket]["total"] or None for bucket in bucket_order]),
+        ("Dcard 全市場", [overall_summary[bucket]["total"] or None for bucket in bucket_order]),
     ]
     multi_line_chart(charts_dir / "company_monthly_vs_market.svg", "年資月薪對照", bucket_order, monthly_series, "萬元")
     multi_line_chart(charts_dir / "company_total_vs_market.svg", "年資年薪對照", bucket_order, total_series, "萬元")
@@ -1159,8 +1159,8 @@ def build_site(input_path: Path, output_dir: Path) -> None:
         ["樣本數", str(int(company_stats["count"])), str(int(industry_stats["count"])), str(int(overall_stats["count"]))],
         ["月薪中位數", f"{fmt(company_stats['monthly_median'])} 萬", f"{fmt(industry_stats['monthly_median'])} 萬", f"{fmt(overall_stats['monthly_median'])} 萬"],
         ["年薪中位數", f"{fmt(company_stats['total_median'])} 萬", f"{fmt(industry_stats['total_median'])} 萬", f"{fmt(overall_stats['total_median'])} 萬"],
-        ["月薪差距（相對同產業）", f"{fmt(company_stats['monthly_median'] - industry_stats['monthly_median'])} 萬", "-", "-"],
-        ["年薪差距（相對同產業）", f"{fmt(company_stats['total_median'] - industry_stats['total_median'])} 萬", "-", "-"],
+        ["月薪差距（相對 Dcard 同產業）", f"{fmt(company_stats['monthly_median'] - industry_stats['monthly_median'])} 萬", "-", "-"],
+        ["年薪差距（相對 Dcard 同產業）", f"{fmt(company_stats['total_median'] - industry_stats['total_median'])} 萬", "-", "-"],
     ]
     company_vs_industry_rows = []
     company_vs_market_rows = []
@@ -1193,7 +1193,7 @@ def build_site(input_path: Path, output_dir: Path) -> None:
         COMPANY_DISPLAY_NAME,
         "company.html",
         f"""
-<section><p class="lede">這頁把一間 SaaS 公司的薪資樣本當作案例，示範如何用同產業與全市場基準判讀公司薪資位置。公司樣本數為 {int(company_stats['count'])} 筆。</p></section>
+<section><p class="lede">以 {int(company_stats['count'])} 筆 SaaS 案例樣本，對照 Dcard 同產業與 Dcard 全市場薪資。</p></section>
 {insight_box("分析見解", [
     f"案例公司月薪中位數為 {fmt(company_stats['monthly_median'])} 萬、年薪中位數為 {fmt(company_stats['total_median'])} 萬；年薪低於同產業中位數 {fmt(industry_stats['total_median'])} 萬 21.7 萬。",
     "1-3 年與 3-5 年區間的公司年薪中位數分別為 78 萬與 91 萬，與同產業相同；早中期薪資位置貼近同產業基準。",
@@ -1205,15 +1205,15 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 </section>
 <section>
   <h2>整體對照</h2>
-  {table(["指標", f"{COMPANY_DISPLAY_NAME}", "同產業", "全市場"], company_comparison_rows)}
+  {table(["指標", f"{COMPANY_DISPLAY_NAME}", "Dcard 同產業", "Dcard 全市場"], company_comparison_rows)}
 </section>
 <section>
-  <h2>案例對同產業</h2>
-  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "同產業樣本", "同產業月薪", "同產業年薪"], company_vs_industry_rows)}</div>
+  <h2>案例對 Dcard 同產業</h2>
+  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "Dcard 同產業樣本", "Dcard 同產業月薪", "Dcard 同產業年薪"], company_vs_industry_rows)}</div>
 </section>
 <section>
-  <h2>案例對全市場</h2>
-  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "全市場樣本", "全市場月薪", "全市場年薪"], company_vs_market_rows)}</div>
+  <h2>案例對 Dcard 全市場</h2>
+  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "Dcard 全市場樣本", "Dcard 全市場月薪", "Dcard 全市場年薪"], company_vs_market_rows)}</div>
 </section>
 """,
     ), encoding="utf-8")
