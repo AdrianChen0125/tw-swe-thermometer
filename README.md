@@ -12,6 +12,11 @@ Taiwan software engineer salary transparency platform.
 └─ company_industry_classification.csv  Company-to-industry mapping
 ```
 
+Generated URLs:
+
+- `https://data-navigator.net/`
+- `https://data-navigator.net/tw-swe-thermometer/index.html`
+
 ## GitHub Pages deployment
 
 1. Push this repo to GitHub.
