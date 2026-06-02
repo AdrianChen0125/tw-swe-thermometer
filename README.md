@@ -7,7 +7,7 @@ Taiwan software engineer salary transparency platform.
 .
 ├─ .github/                GitHub Pages workflow
 ├─ data/dcard/             Raw input data and exclusion lists
-├─ scripts/                Cleaning, report generation, and deploy helpers
+├─ scripts/                Cleaning and report generation
 ├─ site/                   Generated static site output
 └─ company_industry_classification.csv  Company-to-industry mapping
 ```
