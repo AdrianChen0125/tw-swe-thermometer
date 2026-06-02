@@ -130,14 +130,6 @@ def salary_stats(rows: list[dict[str, str]]) -> dict[str, float]:
     }
 
 
-def confidence_label(count: int) -> str:
-    if count >= MAIN_CHART_MIN_SAMPLES:
-        return "可參考"
-    if count >= 5:
-        return "樣本偏少"
-    return "樣本過少"
-
-
 def industry_label(value: str) -> str:
     return INDUSTRY_LABELS.get(value, value)
 
@@ -490,13 +482,12 @@ def grouped_table(groups: dict[str, list[dict[str, str]]]) -> list[list[str]]:
         rows.append([
             label,
             str(count),
-            confidence_label(count),
             fmt(stats["monthly_median"]),
             f"{fmt(stats['monthly_p25'])} - {fmt(stats['monthly_p75'])}",
             fmt(stats["total_median"]),
             f"{fmt(stats['total_p25'])} - {fmt(stats['total_p75'])}",
         ])
-    return sorted(rows, key=lambda row: (float(row[5]), int(row[1])), reverse=True)
+    return sorted(rows, key=lambda row: (float(row[4]), int(row[1])), reverse=True)
 
 
 def enough_samples(row: list[str]) -> bool:
@@ -807,11 +798,122 @@ footer {
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 @media (max-width: 820px) {
-  .site-header { grid-template-columns: 1fr; align-items: start; }
-  nav { justify-content: flex-start; }
-  .metric-grid, .chart-grid { grid-template-columns: 1fr; }
-  main { width: min(100% - 28px, 1120px); }
-  table { font-size: 14px; }
+  body {
+    line-height: 1.45;
+    background: #f8fafc;
+  }
+  .site-header {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 18px;
+    padding: 24px 16px 16px;
+  }
+  .eyebrow {
+    display: none;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.08;
+  }
+  h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 1.15;
+  }
+  nav {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav a {
+    flex: 0 0 auto;
+    padding: 7px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: none;
+  }
+  main {
+    width: min(100% - 24px, 1120px);
+    padding: 22px 0 44px;
+  }
+  section {
+    margin-bottom: 20px;
+  }
+  .lede {
+    display: -webkit-box;
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    color: #334155;
+    font-size: 16px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .chart-note {
+    display: none;
+  }
+  .insight {
+    padding: 14px 14px;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+  .insight h2 {
+    font-size: 18px;
+  }
+  .insight ul {
+    padding-left: 18px;
+    font-size: 15px;
+  }
+  .insight li {
+    display: none;
+  }
+  .insight li:first-child {
+    display: list-item;
+  }
+  .metric-grid, .chart-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .metric {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+  .metric strong {
+    margin-top: 0;
+    font-size: 24px;
+  }
+  .chart {
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+  .table-scroll,
+  section:has(> table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    min-width: 640px;
+    border-radius: 12px;
+    font-size: 13px;
+    box-shadow: none;
+  }
+  th, td {
+    padding: 8px 9px;
+    white-space: nowrap;
+  }
+  footer {
+    padding: 18px 16px;
+    font-size: 13px;
+  }
 }
 """, encoding="utf-8")
 
@@ -839,13 +941,13 @@ def build_site(input_path: Path, output_dir: Path) -> None:
     bar_chart(
         charts_dir / "industry_total_median.svg",
         f"產業年薪中位數排行（n >= {MAIN_CHART_MIN_SAMPLES}）",
-        [(industry_label(row[0]), float(row[5])) for row in industry_stable_rows],
+        [(industry_label(row[0]), float(row[4])) for row in industry_stable_rows],
         "萬",
     )
     bar_chart(
         charts_dir / "role_total_median.svg",
         f"職能年薪中位數排行（n >= {MAIN_CHART_MIN_SAMPLES}）",
-        [(row[0], float(row[5])) for row in role_stable_rows],
+        [(row[0], float(row[4])) for row in role_stable_rows],
         "萬",
     )
 
@@ -925,7 +1027,7 @@ def build_site(input_path: Path, output_dir: Path) -> None:
     high_rows = [row for row in rows if parse_number(row["total"]) is not None and parse_number(row["total"]) >= high_cutoff]
     high_detail_rows = [
         [
-            f"公司 {index + 1}",
+            row["company"],
             industry_label(row["company_category"]),
             row["tittle"],
             row["year_of_experience"],
@@ -933,7 +1035,7 @@ def build_site(input_path: Path, output_dir: Path) -> None:
             row["bonus"],
             row["total"],
         ]
-        for index, row in enumerate(sorted(high_rows, key=lambda item: parse_number(item["total"]) or 0, reverse=True))
+        for row in sorted(high_rows, key=lambda item: parse_number(item["total"]) or 0, reverse=True)
     ]
     high_category = Counter(row["company_category"] for row in high_rows)
     high_role = Counter(row["tittle"] for row in high_rows)
@@ -986,11 +1088,11 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 <section><figure class="chart"><img src="assets/charts/industry_total_median.svg" alt="產業年薪中位數排行">{chart_note(f"圖中只呈現樣本數至少 {MAIN_CHART_MIN_SAMPLES} 筆的產業；小樣本分類列在補充表。")}</figure></section>
 <section>
   <h2>主要產業樣本</h2>
-  {table(["產業", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], industry_stable_display_rows)}
+  {table(["產業", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], industry_stable_display_rows)}
 </section>
 <section>
   <h2>小樣本補充</h2>
-  {table(["產業", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], industry_small_display_rows)}
+  {table(["產業", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], industry_small_display_rows)}
 </section>
 """,
     ), encoding="utf-8")
@@ -999,7 +1101,7 @@ def build_site(input_path: Path, output_dir: Path) -> None:
         "職能薪資分析",
         "role.html",
         f"""
-<section><p class="lede">依標準化職稱比較薪資。主要排名圖只納入樣本數至少 {MAIN_CHART_MIN_SAMPLES} 筆的職能；所有職能仍保留在表格中並標示可信度。</p></section>
+<section><p class="lede">依標準化職稱比較薪資。主要排名圖只納入樣本數至少 {MAIN_CHART_MIN_SAMPLES} 筆的職能；所有職能仍保留在表格中。</p></section>
 {insight_box("分析見解", [
     "software engineer 有 297 筆，是最大宗職能；年薪中位數 98 萬，高於 backend、frontend、mobile 等主要工程職能。",
     "主要職能中，backend engineer 有 50 筆、frontend engineer 有 45 筆，但年薪中位數分別為 84 萬與 72.7 萬，低於 software engineer。",
@@ -1008,11 +1110,11 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 <section><figure class="chart"><img src="assets/charts/role_total_median.svg" alt="職能年薪中位數排行">{chart_note(f"圖中只呈現樣本數至少 {MAIN_CHART_MIN_SAMPLES} 筆的職能；排序以年薪中位數為主。")}</figure></section>
 <section>
   <h2>主要職能樣本</h2>
-  {table(["職能", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], role_stable_rows)}
+  {table(["職能", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], role_stable_rows)}
 </section>
 <section>
   <h2>小樣本補充</h2>
-  {table(["職能", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], role_small_rows)}
+  {table(["職能", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], role_small_rows)}
 </section>
 """,
     ), encoding="utf-8")
@@ -1042,11 +1144,11 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 <section><figure class="chart"><img src="assets/charts/experience_total_median.svg" alt="年資與年薪中位數">{chart_note("圖表排除未知年資；年資區間的核心解讀是責任範圍升級帶來的薪資差距。")}</figure></section>
 <section>
   <h2>年資區間統計</h2>
-  {table(["年資區間", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], exp_stable_rows)}
+  {table(["年資區間", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], exp_stable_rows)}
 </section>
 <section>
   <h2>小樣本補充</h2>
-  {table(["年資區間", "樣本數", "資料可信度", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], exp_small_rows)}
+  {table(["年資區間", "樣本數", "月薪中位數", "月薪 P25-P75", "年薪中位數", "年薪 P25-P75"], exp_small_rows)}
 </section>
 """,
     ), encoding="utf-8")
@@ -1149,7 +1251,7 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 </section>
 <section>
   <h2>高薪樣本明細</h2>
-  {table(["匿名公司", "產業", "職能", "年資", "月薪", "Bonus", "年薪"], high_detail_rows)}
+  {table(["公司", "產業", "職能", "年資", "月薪", "Bonus", "年薪"], high_detail_rows)}
 </section>
 """,
     ), encoding="utf-8")
