@@ -21,7 +21,6 @@ NAV_ITEMS = [
     ("cross_analysis.html", "交叉分析"),
     ("high_salary.html", "高薪樣本"),
     ("actions.html", "行動建議"),
-    ("methodology.html", "方法"),
 ]
 MAIN_CHART_MIN_SAMPLES = 10
 CROSS_ANALYSIS_MIN_SAMPLES = 5
@@ -1291,35 +1290,6 @@ def build_site(input_path: Path, output_dir: Path) -> None:
 </section>
 """,
     ), encoding="utf-8")
-
-    output_dir.joinpath("methodology.html").write_text(page(
-        "方法與限制",
-        "methodology.html",
-        """
-<section>
-  <h2>資料處理</h2>
-  <p class="lede">報告使用清理後的匿名薪資資料。薪資單位以萬元計，年薪以月薪乘上十二個月加 bonus 月數估算。</p>
-</section>
-<section>
-  <table>
-    <thead><tr><th>項目</th><th>規則</th></tr></thead>
-    <tbody>
-      <tr><td>欄位標準化</td><td>保留日期、產業分類、職能、年資、月薪、bonus 與年薪。</td></tr>
-      <tr><td>分類處理</td><td>只保留可歸類到明確產業的樣本。</td></tr>
-      <tr><td>年薪計算</td><td>年薪 = 月薪 * (12 + bonus)。</td></tr>
-      <tr><td>異常值排除</td><td>排除月薪大於 100、bonus 大於 40、年薪大於 1000、年資大於 30 的樣本。</td></tr>
-      <tr><td>樣本數門檻</td><td>主要排名圖只納入樣本數至少 10 筆的分類；5-9 筆標示為樣本偏少，低於 5 筆標示為樣本過少，並放在補充表。</td></tr>
-      <tr><td>隱私處理</td><td>除高薪樣本明細外，其餘頁面只呈現彙總統計。</td></tr>
-    </tbody>
-  </table>
-</section>
-<section>
-  <h2>限制</h2>
-  <p class="lede">資料來源為 Dcard 上的匿名薪資樣本，包含樣本偏誤、時間差與填寫誤差。小樣本類別列為補充資料，主結論以樣本數達門檻的分類為準。</p>
-</section>
-""",
-    ), encoding="utf-8")
-
 
 def main() -> None:
     parser = argparse.ArgumentParser()

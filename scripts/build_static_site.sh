@@ -20,6 +20,8 @@ import shutil
 site_root = Path("site")
 subpath_root = site_root / "tw-swe-thermometer"
 
+site_root.joinpath("methodology.html").unlink(missing_ok=True)
+
 if subpath_root.exists():
     shutil.rmtree(subpath_root)
 subpath_root.mkdir(parents=True, exist_ok=True)
