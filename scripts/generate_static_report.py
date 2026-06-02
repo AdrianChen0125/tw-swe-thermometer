@@ -1162,25 +1162,32 @@ def build_site(input_path: Path, output_dir: Path) -> None:
         ["月薪差距（相對同產業）", f"{fmt(company_stats['monthly_median'] - industry_stats['monthly_median'])} 萬", "-", "-"],
         ["年薪差距（相對同產業）", f"{fmt(company_stats['total_median'] - industry_stats['total_median'])} 萬", "-", "-"],
     ]
-    company_bucket_rows = []
+    company_vs_industry_rows = []
+    company_vs_market_rows = []
     for bucket in bucket_order:
         c = company_summary[bucket]
         i = industry_summary[bucket]
         o = overall_summary[bucket]
-        if not c["count"] and not i["count"]:
-            continue
-        company_bucket_rows.append([
-            bucket,
-            str(int(c["count"])),
-            f"{fmt(c['monthly'])} 萬" if c["count"] else "-",
-            f"{fmt(c['total'])} 萬" if c["count"] else "-",
-            str(int(i["count"])),
-            f"{fmt(i['monthly'])} 萬" if i["count"] else "-",
-            f"{fmt(i['total'])} 萬" if i["count"] else "-",
-            str(int(o["count"])),
-            f"{fmt(o['monthly'])} 萬" if o["count"] else "-",
-            f"{fmt(o['total'])} 萬" if o["count"] else "-",
-        ])
+        if c["count"] or i["count"]:
+            company_vs_industry_rows.append([
+                bucket,
+                str(int(c["count"])),
+                f"{fmt(c['monthly'])} 萬" if c["count"] else "-",
+                f"{fmt(c['total'])} 萬" if c["count"] else "-",
+                str(int(i["count"])),
+                f"{fmt(i['monthly'])} 萬" if i["count"] else "-",
+                f"{fmt(i['total'])} 萬" if i["count"] else "-",
+            ])
+        if c["count"] or o["count"]:
+            company_vs_market_rows.append([
+                bucket,
+                str(int(c["count"])),
+                f"{fmt(c['monthly'])} 萬" if c["count"] else "-",
+                f"{fmt(c['total'])} 萬" if c["count"] else "-",
+                str(int(o["count"])),
+                f"{fmt(o['monthly'])} 萬" if o["count"] else "-",
+                f"{fmt(o['total'])} 萬" if o["count"] else "-",
+            ])
 
     output_dir.joinpath("company.html").write_text(page(
         COMPANY_DISPLAY_NAME,
@@ -1201,8 +1208,12 @@ def build_site(input_path: Path, output_dir: Path) -> None:
   {table(["指標", f"{COMPANY_DISPLAY_NAME}", "同產業", "全市場"], company_comparison_rows)}
 </section>
 <section>
-  <h2>年資對照</h2>
-  <div class="table-scroll">{table(["年資", f"{COMPANY_DISPLAY_NAME}樣本", f"{COMPANY_DISPLAY_NAME}月薪中位數", f"{COMPANY_DISPLAY_NAME}年薪中位數", "同產業樣本", "同產業月薪中位數", "同產業年薪中位數", "全市場樣本", "全市場月薪中位數", "全市場年薪中位數"], company_bucket_rows)}</div>
+  <h2>案例對同產業</h2>
+  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "同產業樣本", "同產業月薪", "同產業年薪"], company_vs_industry_rows)}</div>
+</section>
+<section>
+  <h2>案例對全市場</h2>
+  <div class="table-scroll">{table(["年資", "案例樣本", "案例月薪", "案例年薪", "全市場樣本", "全市場月薪", "全市場年薪"], company_vs_market_rows)}</div>
 </section>
 """,
     ), encoding="utf-8")
