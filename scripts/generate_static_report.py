@@ -176,7 +176,7 @@ def bar_chart(path: Path, title: str, items: list[tuple[str, float]], unit: str)
         )
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">
 <style>
-.title{{font:700 24px sans-serif;fill:#0f172a}}.label{{font:14px sans-serif;fill:#334155}}.value{{font:13px sans-serif;fill:#0f172a}}.bar{{fill:#2563eb}}
+.title{{font:700 28px sans-serif;fill:#0f172a}}.label{{font:16px sans-serif;fill:#334155}}.value{{font:16px sans-serif;fill:#0f172a}}.bar{{fill:#2563eb}}
 </style>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="38" class="title">{html.escape(title)}</text>
@@ -217,7 +217,7 @@ def histogram(path: Path, title: str, values: list[float], unit: str, bins: int 
             labels.append(f'<text x="{x:.1f}" y="{height - 24}" class="axis">{html.escape(fmt(label))}</text>')
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">
 <style>
-.title{{font:700 24px sans-serif;fill:#0f172a}}.axis{{font:12px sans-serif;fill:#475569}}.bar{{fill:#14b8a6}}.note{{font:13px sans-serif;fill:#475569}}
+.title{{font:700 28px sans-serif;fill:#0f172a}}.axis{{font:15px sans-serif;fill:#475569}}.bar{{fill:#14b8a6}}.note{{font:15px sans-serif;fill:#475569}}
 </style>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="38" class="title">{html.escape(title)}</text>
@@ -290,7 +290,7 @@ def line_chart(
         )
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">
 <style>
-.title{{font:700 24px sans-serif;fill:#0f172a}}.axis{{font:12px sans-serif;fill:#475569}}.value{{font:13px sans-serif;fill:#0f172a}}.comparison-value{{font:12px sans-serif;fill:#2563eb}}.legend{{font:13px sans-serif;fill:#334155}}.line{{fill:none;stroke:#f97316;stroke-width:4}}.dot{{fill:#f97316}}.comparison-line{{fill:none;stroke:#2563eb;stroke-width:3;stroke-dasharray:8 6}}.comparison-dot{{fill:#2563eb}}
+.title{{font:700 28px sans-serif;fill:#0f172a}}.axis{{font:15px sans-serif;fill:#475569}}.value{{font:16px sans-serif;fill:#0f172a}}.comparison-value{{font:15px sans-serif;fill:#2563eb}}.legend{{font:15px sans-serif;fill:#334155}}.line{{fill:none;stroke:#f97316;stroke-width:4}}.dot{{fill:#f97316}}.comparison-line{{fill:none;stroke:#2563eb;stroke-width:3;stroke-dasharray:8 6}}.comparison-dot{{fill:#2563eb}}
 </style>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="38" class="title">{html.escape(title)}（{html.escape(unit)}）</text>
@@ -351,7 +351,7 @@ def multi_line_chart(path: Path, title: str, labels: list[str], series: list[tup
     ]
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">
 <style>
-.title{{font:700 24px sans-serif;fill:#0f172a}}.axis{{font:12px sans-serif;fill:#475569}}.legend{{font:13px sans-serif;fill:#334155}}.series{{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}}
+.title{{font:700 28px sans-serif;fill:#0f172a}}.axis{{font:15px sans-serif;fill:#475569}}.legend{{font:15px sans-serif;fill:#334155}}.series{{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}}
 </style>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="38" class="title">{html.escape(title)}（{html.escape(unit)}）</text>
@@ -404,7 +404,7 @@ def grouped_bar_chart(path: Path, title: str, labels: list[str], series: list[tu
     ]
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{html.escape(title)}">
 <style>
-.title{{font:700 24px sans-serif;fill:#0f172a}}.axis{{font:12px sans-serif;fill:#475569}}.legend{{font:13px sans-serif;fill:#334155}}.value{{font:12px sans-serif;fill:#0f172a}}
+.title{{font:700 28px sans-serif;fill:#0f172a}}.axis{{font:15px sans-serif;fill:#475569}}.legend{{font:15px sans-serif;fill:#334155}}.value{{font:15px sans-serif;fill:#0f172a}}
 </style>
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="24" y="38" class="title">{html.escape(title)}（{html.escape(unit)}）</text>
